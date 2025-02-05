@@ -10,6 +10,8 @@ const io = new Server(5454, {
   },
 });
 
+console.log(process.env.APP_ORIGIN);
+
 io.on("connection", (socket) => {
   console.log("A client connected:", socket.id);
 
