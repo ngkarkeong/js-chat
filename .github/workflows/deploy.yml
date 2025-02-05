@@ -38,7 +38,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 80
+          node-version: 20
 
       - name: Install Client Dependencies
         run: |
