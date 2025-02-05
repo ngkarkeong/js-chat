@@ -2,12 +2,13 @@ import { io } from "socket.io-client";
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
 const messageContainer = document.getElementById("message-container");
+console.log(import.meta.env.VITE_SERVER_URL);
 
 const name = prompt("what is your name");
 appendMessage("You joined");
 
 const socket = io(import.meta.env.VITE_SERVER_URL);
-console.log(import.meta.env.VITE_SERVER_URL);
+
 socket.on("connect", () => {
   console.log("Connected to server:", socket.id);
 });
