@@ -29,6 +29,8 @@ jobs:
         run: |
           npm install -g netlify-cli
           netlify deploy --prod --dir=server --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID_SERVER }}
+        env:
+          APP_ORIGIN: ${{ secrets.APP_ORIGIN }}
   deploy-client:
     runs-on: ubuntu-latest
     steps:
@@ -54,3 +56,5 @@ jobs:
         run: |
           npm install -g netlify-cli
           netlify deploy --prod --dir=client/dist --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID_CLIENT }}
+        env:
+          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
