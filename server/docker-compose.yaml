@@ -1,0 +1,22 @@
+version: "3"
+services:
+  js-chat-server:
+    image: node:20-alpine
+    container_name: js-chat-server
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "5454:5454"
+    command: sh -c "npm -D install nodemon && npm install && npm run dev"
+  js-chat-client:
+    image: node:20-alpine
+    container_name: js-chat-client
+    working_dir: /var/www/html
+    volumes:
+      - ../client:/var/www/html
+    ports:
+      - "5455:5455"
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - js-chat-server

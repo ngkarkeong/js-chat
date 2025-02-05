@@ -1,0 +1,54 @@
+# name: Deploy js-chat project to Netlify
+
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       # Step 1: Checkout the code
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       # Step 2: Set up Node.js
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: "20"
+
+#       # Step 3: Install dependencies
+#       - name: Install dependencies
+#         run: npm install
+
+#       # Step 4: Build the Vite project
+#       - name: Build project
+#         run: npm run build
+
+#       # Step 5: Install Netlify CLI
+#       - name: Install Netlify CLI
+#         run: npm install -g netlify-cli
+
+#       # Step 6: Deploy to Netlify
+#       - name: Deploy to Netlify
+#         run: netlify deploy --dir=dist --prod
+#         env:
+#           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+#       # Step 6: Build Docker image using the `dist` folder
+#       - name: Build Docker Image
+#         run: |
+#           docker build -t ngkk/test-cicd:latest .
+
+#       # Step 7: Push Docker image to Docker Hub
+#       - name: Push Docker Image
+#         run: |
+#           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+#           docker push ngkk/test-cicd:latest
