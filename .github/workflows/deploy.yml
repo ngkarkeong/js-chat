@@ -9,28 +9,28 @@ on:
       - main
 
 jobs:
-  deploy-server:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+  # deploy-server:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v3
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 20
 
-      - name: Install Server Dependencies
-        run: |
-          cd server
-          npm install
+  #     - name: Install Server Dependencies
+  #       run: |
+  #         cd server
+  #         npm install
 
-      - name: Deploy Server to Netlify (Optional, if hosting backend on Netlify)
-        run: |
-          npm install -g netlify-cli
-          netlify deploy --prod --dir=server --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID_SERVER }}
-        env:
-          APP_ORIGIN: ${{ secrets.APP_ORIGIN }}
+  #     - name: Deploy Server to Netlify (Optional, if hosting backend on Netlify)
+  #       run: |
+  #         npm install -g netlify-cli
+  #         netlify deploy --prod --dir=server --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID_SERVER }}
+  #       env:
+  #         APP_ORIGIN: ${{ secrets.APP_ORIGIN }}
   deploy-client:
     runs-on: ubuntu-latest
     steps:
@@ -52,9 +52,10 @@ jobs:
           cd client
           npm run build
 
-      - name: Deploy Client to Netlify
+      - name: Push Build Folder to Render (Optional)
         run: |
-          npm install -g netlify-cli
-          netlify deploy --prod --dir=client/dist --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --site ${{ secrets.NETLIFY_SITE_ID_CLIENT }}
-        env:
-          VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+          # Assuming 'dist/' is the build folder for Vite
+          curl -X POST \
+            -F "file=@./dist" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys"  # Example Render API endpoint
