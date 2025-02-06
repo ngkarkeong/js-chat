@@ -52,10 +52,7 @@ jobs:
           cd client
           npm run build
 
-      - name: Push Build Folder to Render (Optional)
+      - name: Trigger Render Deploy
         run: |
-          # Assuming 'dist/' is the build folder for Vite
-          curl -X POST \
-            -F "file=@./dist" \
-            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-            "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys"  # Example Render API endpoint
+          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
