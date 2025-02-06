@@ -36,6 +36,4 @@ jobs:
     steps:
       # Step : Deploy to Render.com
       - name: Deploy to Render
-        run: |
-          cd client
-          curl -X POST ${{secrets.RENDER_DEPLOY_HOOK}}
+        run: curl -X POST ${{secrets.RENDER_DEPLOY_HOOK}}
