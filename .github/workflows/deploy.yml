@@ -55,6 +55,9 @@ jobs:
       - name: Zip dist folder
         run: zip -r dist.zip ./dist
 
+      - name: Verify Build Directory
+        run: ls -la ./dist
+
       # Step : Deploy to Render.com
       - name: Deploy to Render
         env:
