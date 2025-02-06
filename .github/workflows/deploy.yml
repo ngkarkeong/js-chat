@@ -61,6 +61,7 @@ jobs:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }} # Store your Render API key in GitHub Secrets
           RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }} # Store your Render Service ID in GitHub Secrets
         run: |
+          cd client
           curl -X POST \
             -H "Authorization: Bearer $RENDER_API_KEY" \
             -H "Content-Type: application/zip" \
