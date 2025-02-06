@@ -6,4 +6,7 @@ const getEnv = (key, defaultValue) => {
   return value;
 };
 
-export const APP_ORIGIN = getEnv("APP_ORIGIN");
+module.exports = {
+  APP_ORIGIN: getEnv("APP_ORIGIN"),
+  PORT: getEnv("PORT", "80"),
+};

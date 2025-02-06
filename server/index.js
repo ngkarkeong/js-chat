@@ -1,16 +1,17 @@
 require("dotenv").config();
 const { Server } = require("socket.io");
+const { APP_ORIGIN, PORT } = require("./constants/env");
 
 const users = {};
 
-const io = new Server(5454, {
+const io = new Server(PORT, {
   cors: {
-    origin: process.env.APP_ORIGIN, // ✅ Allow frontend origin
+    origin: APP_ORIGIN, // ✅ Allow frontend origin
     methods: ["GET", "POST"],
   },
 });
 
-console.log(process.env.APP_ORIGIN);
+console.log(APP_ORIGIN);
 
 io.on("connection", (socket) => {
   console.log("A client connected:", socket.id);
