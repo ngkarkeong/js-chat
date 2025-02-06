@@ -51,6 +51,12 @@ jobs:
         run: |
           cd client
           npm run build
+      - name: Show Current Directory and Files
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Files in current directory:"
+          ls -la
 
       - name: Verify Build Directory
         run: ls -la ./dist
