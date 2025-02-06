@@ -6,7 +6,7 @@ const users = {};
 
 const io = new Server(PORT, {
   cors: {
-    origin: APP_ORIGIN, // ✅ Allow frontend origin
+    origin: "*", // ✅ Allow frontend origin
     methods: ["GET", "POST"],
   },
 });
