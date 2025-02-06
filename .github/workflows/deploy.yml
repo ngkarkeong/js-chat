@@ -53,7 +53,7 @@ jobs:
           npm run build
 
       - name: Zip dist folder
-        run: zip -r dist.zip dist
+        run: zip -r dist.zip ./dist
 
       # Step : Deploy to Render.com
       - name: Deploy to Render
