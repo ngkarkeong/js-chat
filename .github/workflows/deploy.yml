@@ -51,18 +51,9 @@ jobs:
         run: |
           cd client
           npm run build
-      - name: Show Current Directory and Files
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Files in current directory:"
-          ls -la
-
-      - name: Verify Build Directory
-        run: ls -la ./dist
 
       - name: Zip dist folder
-        run: zip -r dist.zip ./dist
+        run: zip -r dist.zip ./client/dist
 
       # Step : Deploy to Render.com
       - name: Deploy to Render
