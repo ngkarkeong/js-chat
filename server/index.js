@@ -11,7 +11,7 @@ const io = new Server(PORT, {
   },
 });
 
-console.log(APP_ORIGIN);
+console.log(APP_ORIGIN, PORT);
 
 io.on("connection", (socket) => {
   console.log("A client connected:", socket.id);
