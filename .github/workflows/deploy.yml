@@ -52,7 +52,17 @@ jobs:
           cd client
           npm run build
 
-      - name: Trigger Render Deploy
+      - name: Zip dist folder
+        run: zip -r dist.zip dist
+
+      # Step : Deploy to Render.com
+      - name: Deploy to Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }} # Store your Render API key in GitHub Secrets
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }} # Store your Render Service ID in GitHub Secrets
         run: |
-          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
-            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+          curl -X POST \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Content-Type: application/zip" \
+            --data-binary @dist.zip \
+            "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys"
